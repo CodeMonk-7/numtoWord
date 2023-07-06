@@ -1,6 +1,6 @@
 show databases;
 
-use prateek;
+use numalpha;//table consist of 1 to 99 numbers with their alphabetic representation
 drop function accept_number;
 DELIMITER //
 
@@ -26,19 +26,19 @@ BEGIN
   return 'zero';
   end if;
   
-   set num = reverse(str);
+   set num = reverse(str);//to check numbers from unit places
   SET tenth_num = SUBSTRING(num, 1, 2);
   if(tenth_num=0) then
    SET tenth_num = '';
 else
-    SELECT value INTO tendoub_num FROM alpha WHERE id = CONCAT(SUBSTRING(num, 2, 1),SUBSTRING(num, 1, 1) );
+    SELECT value INTO tendoub_num FROM alpha WHERE id = CONCAT(SUBSTRING(num, 2, 1),SUBSTRING(num, 1, 1) );//after revesing the string reverse the substring to get exact digit
     if(SUBSTRING(num, 3, 7)!=0) then
      SET tenth_num = CONCAT('and',' ',tendoub_num);
     else
      SET tenth_num = CONCAT(tendoub_num);
     END IF;
   END IF; 
-  SET hundred_num = SUBSTRING(num, 3, 1);  
+  SET hundred_num = SUBSTRING(num, 3, 1);//only one digit on hunderadth place
    if(hundred_num=0) then
    SET hundred_num = '';
 else  
@@ -70,7 +70,7 @@ else
     SET crore_num = CONCAT(crodoub_num, ' crore');
   END IF;
   
-  SET final_num = CONCAT( crore_num,' ',lakh_num,' ',thousand_num,' ',hundred_num,' ',tenth_num);
+  SET final_num = CONCAT( crore_num,' ',lakh_num,' ',thousand_num,' ',hundred_num,' ',tenth_num);//concating all the number outputs for final number 
   RETURN final_num;
 END //
 
